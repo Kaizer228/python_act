@@ -1,15 +1,15 @@
 # INTIALIZING DJANGO
 
-django-admin startproject app
+pip install django
+django-admin startproject src
 
 # GO TO THE CREATED DIR
 
-app backend
+cd src
 
-# CREATE DIR INSIDE THE CREATED BACKEND DIR
+# CREATE 2ND DIR INSIDE THE CREATED MAIN(src) DIR
 
-python manage.py startapp backend
-
+python manage.py startapp app  
 
 
 #  AFTER YOU CREATE A DIR IN MAIN DIR YOU NEED TO INCLUDE THE DIRECTORY OF BACKEND OR THE DIRECTORY YOU MAKE INSIDE 
@@ -21,12 +21,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend'
+    'app' <-( 2ND DIRECTORY YOU CREATE INSIDE THE SRC)
+
 ]
 
 
 
-# AFTER YOU INCLUDE THE PATH OF BACKEND DIR, YOU NEED TO CREATE A urls.py FILE INSIDE THE BACKEND AND PUT THIS
+# AFTER YOU INCLUDE THE PATH OF APP DIR, YOU NEED TO CREATE A urls.py FILE IN 2ND DIRECTORY WHICH IS (app) and PUT THIS
 
 from django.urls import path
 from . import views
@@ -36,14 +37,14 @@ urlpatterns = [
 ]
 
 
-# AFTER YOU CREATE URL FILE IN BACKEND DIR  INCLUDE THE URL INSIDE THE BACKEND(MAIN) urls.py file AND INCLIDE THE PATH 
+# AFTER YOU CREATE URL FILE IN 2ND DIR  INCLUDE THE URL INSIDE THE SRC(MAIN DIR) urls.py file AND INCLUDE THE PATH 
 
 from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('backend.urls')),
+    path('', include('app.urls')),
 ]
 
 
@@ -56,6 +57,12 @@ from django.shortcuts import render, HttpResponse
 def home(request):
     return HttpResponse(f"Hello world {request}")
 
+or 
+ 
+def home(request):
+    return render(request, "home.html")
+
+
 
 
 # AFTER THAT IS MAKE SURE YOUR MACHINE IP IS ALLOW TO HOST
@@ -63,7 +70,7 @@ def home(request):
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'kvurl681-a4hj9gzb-gan84bkj008p.ac4-preview.marscode.dev',
+    'kvurl681-a4hj9gzb-gan84bkj008p.ac4-preview.marscode.dev', <- THIS IS THE URL OF YOUR MARS CODE
 ]
 
 # AFTER THAT IS RUN THE FILE
@@ -71,7 +78,7 @@ ALLOWED_HOSTS = [
 python manage.py runserver
 
 
-# IF YOU SUCEFULLY RUN THE SERVER MAKE A TEMPLATES DIR AND TEST MAKE BASE AND HOME.HTML
+# IF YOU SUCCESFULLY RUN THE SERVER MAKE A TEMPLATES DIR AND TEST MAKE BASE AND HOME.HTML
 
 
 
